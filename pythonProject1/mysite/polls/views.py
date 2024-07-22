@@ -12,8 +12,8 @@ from django.core.paginator import Paginator
 # ----------------- Library Management System Views -----------------
 
 # Home view
-def home(request):
-    return render(request, "home.html")
+def index(request):
+    return render(request, "index.html")
 
 
 # Login view to login user

@@ -23,7 +23,7 @@ from . import views
 
 # Url patterns for Books app module of Library Management System
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", views.index, name="index"),
     path("issue", views.issue, name="issue"),
     path("login/", views.login, name="login"),
     path("register/", views.register, name="register"),
