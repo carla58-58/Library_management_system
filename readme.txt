@@ -1,4 +1,4 @@
-- Library Management System App
+Library Management System App
 
 
 📋 Table of Contents
@@ -59,26 +59,26 @@ Ready to run the app locally or explore the code? Here’s how you can get start
 
 -Installation:
 
-*Clone the repository:
-git clone <repository-url>
-
-*Create a virtual environment and activate it:
-python3 -m venv env
-source env/bin/activate # On Windows: env\Scripts\activate
-
-*Install dependencies:
-pip install -r requirements.txt
-
-*Apply migrations to set up the database:
-python manage.py migrate
-
-*Create a superuser for admin access:
-python manage.py createsuperuser
+   *Clone the repository:
+   git clone <repository-url>
+   
+   *Create a virtual environment and activate it:
+   python3 -m venv env
+   source env/bin/activate # On Windows: env\Scripts\activate
+   
+   *Install dependencies:
+   pip install -r requirements.txt
+   
+   *Apply migrations to set up the database:
+   python manage.py migrate
+   
+   *Create a superuser for admin access:
+   python manage.py createsuperuser
 
 -Running the Project:
 
-*Run the development server:
-python manage.py runserver
+   *Run the development server:
+   python manage.py runserver
 
 Open [http://localhost:8000] in your browser to view the app.
 
