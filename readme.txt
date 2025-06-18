@@ -1,19 +1,22 @@
- Library Management System App
+- Library Management System App
+
 
 📋 Table of Contents
+
 1. 🤖 [Introduction](#introduction)
 2. ⚙️ [Tech Stack](#tech-stack)
 3. 🔋 [Features](#features)
 4. 🤸 [Quick Start](#quick-start)
 
 
-## <a name="introduction">🤖 Introduction</a>
+🤖 Introduction
 
 Welcome to the Django Library Management System App! This web application is designed to simplify and digitize the management of library resources, providing an intuitive interface for librarians and users alike.
 
 Built with Django and SQLite, the app enables users to manage books, members, and lending activities efficiently, making it ideal for schools, colleges, and small to medium-sized libraries
 
-## <a name="tech-stack">⚙️ Tech Stack</a>
+
+⚙️ Tech Stack
 
 - Django – High-level Python web framework for rapid development and clean, pragmatic design
 
@@ -26,7 +29,7 @@ Built with Django and SQLite, the app enables users to manage books, members, an
 - Django Auth – Built-in authentication system for secure user and admin access
 
 
-## <a name="features">🔋 Features</a>
+🔋 Features
 
 👉 **Book Management**: Add, update, delete, and view books with details like title, author, genre, and availability
 
@@ -45,37 +48,36 @@ Built with Django and SQLite, the app enables users to manage books, members, an
 👉 **Responsive Design*: Optimized for desktops, tablets, and mobile devices
 
 
-## <a name="quick-start">🤸 Quick Start</a>
+🤸 Quick Start
 
 Ready to run the app locally or explore the code? Here’s how you can get started:
 
-**Prerequisites**
+-Prerequisites:
+   Python 3.x
+   Django
+   Git
 
-- Python 3.x
-- Django
-- Git
+-Installation:
 
-**Installation**
-
-- Clone the repository:
+*Clone the repository:
 git clone <repository-url>
 
-- Create a virtual environment and activate it:
+*Create a virtual environment and activate it:
 python3 -m venv env
 source env/bin/activate # On Windows: env\Scripts\activate
 
-- Install dependencies:
+*Install dependencies:
 pip install -r requirements.txt
 
-- Apply migrations to set up the database:
+*Apply migrations to set up the database:
 python manage.py migrate
 
-- Create a superuser for admin access:
+*Create a superuser for admin access:
 python manage.py createsuperuser
 
-**Running the Project**
+-Running the Project:
 
-- Run the development server:
+*Run the development server:
 python manage.py runserver
 
 Open [http://localhost:8000] in your browser to view the app.
