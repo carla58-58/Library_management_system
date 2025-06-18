@@ -1,3 +1,18 @@
+📚 Introduction
+Welcome to the Django Library Management System App! This web application is designed to simplify and digitize the management of library resources, providing an intuitive interface for librarians and users alike. Built with Django and SQLite, the app enables users to manage books, members, and lending activities efficiently, making it ideal for schools, colleges, and small to medium-sized libraries.
+
+⚙️ Tech Stack
+Django: High-level Python web framework for rapid development and clean, pragmatic design.
+
+Python: Main programming language powering the backend logic.
+
+SQLite: Lightweight, file-based database for easy setup and local development.
+
+HTML/CSS & Bootstrap: For responsive and user-friendly web interfaces.
+
+Django Auth: Built-in authentication system for secure user and admin access.
+
+
 ## Library Management System App
 
 
