@@ -77,7 +77,7 @@ Ready to run the app locally or explore the code? Here’s how you can get start
 
 -Running the Project:
 
-   *Run the development server:
+   *Run the development server into Library_management_system\pythonProject1\mysite directory:
    python manage.py runserver
 
 Open [http://localhost:8000] in your browser to view the app.
