@@ -16,6 +16,7 @@
            background-color: linear-gradient(#89b4f4, #cf7ade);
            background-repeat: no-repeat;
            background-size: cover;
+           padding-top: 0;
        }
        
        html, body {
@@ -28,6 +29,51 @@
             flex-direction: column;
         }
         
+        /* Fixed navbar to prevent content shift */
+        .navbar {
+            position: relative;
+            z-index: 1030;
+        }
+        
+        /* Prevent content shift on mobile nav toggle */
+        @media (max-width: 991.98px) {
+            .navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1030;
+            }
+            
+            body {
+                padding-top: 70px; /* Adjust based on navbar height */
+            }
+            
+            .content-wrapper {
+                position: relative;
+                z-index: 1;
+            }
+            
+            /* Smooth navbar collapse animation */
+            .navbar-collapse {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #0d6efd;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+            
+            .navbar-collapse.show, .navbar-collapse.collapsing {
+                display: block !important;
+            }
+            
+            /* Prevent body scroll when nav is open */
+            body.navbar-open {
+                overflow: hidden;
+            }
+        }
 
         .content-wrapper {
             flex: 1 0 auto;
@@ -37,8 +83,78 @@
             flex-shrink: 0;
             color: #e9ecef;
             background-color: #0d6efd;
-            flex-shrink: 0;
-            height: 60px;
+            min-height: 60px;
+            width: 100vw;
+            margin: 0;
+            padding: 15px 0;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+        
+        footer .container-fluid {
+            height: 100%;
+            padding: 0 15px;
+            max-width: 100%;
+        }
+        
+        footer .row {
+            margin: 0;
+            align-items: center;
+            min-height: 30px;
+        }
+        
+        footer .col-md-6 {
+            padding: 5px 15px;
+        }
+        
+        footer p {
+            margin: 0;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: #e9ecef;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        footer a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        
+        /* Mobile footer improvements */
+        @media (max-width: 767.98px) {
+            footer {
+                min-height: 80px;
+                padding: 10px 0;
+            }
+            
+            footer .col-md-6 {
+                text-align: center !important;
+                padding: 5px 10px;
+            }
+            
+            footer .col-md-6:first-child {
+                margin-bottom: 5px;
+            }
+            
+            footer p {
+                font-size: 0.8rem;
+                margin-bottom: 5px;
+            }
+            
+            footer a {
+                font-size: 0.8rem;
+            }
+            
+            .text-md-end {
+                text-align: center !important;
+            }
         }
 
         footer a {
@@ -46,9 +162,39 @@
         }
         .nav-link{
             color: #e9ecef;
-
         }
-           
+        
+        /* Welcome message fix */
+        .navbar-brand {
+            color: #e9ecef !important;
+            font-weight: 500;
+        }
+        
+        /* Mobile navbar improvements */
+        @media (max-width: 991.98px) {
+            .navbar-brand {
+                font-size: 0.9rem;
+                padding: 0.5rem 0;
+            }
+            
+            .navbar-toggler {
+                border: none;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .navbar-toggler:focus {
+                box-shadow: none;
+            }
+            
+            .nav-link {
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+        }
    </style>
 
 </head>
@@ -108,19 +254,74 @@
    
 </div>
 
-   <footer class="py-3">
-        <div class="container">
+   <footer>
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; 2024 Library Management System. All rights reserved.</p>
+                <div class="col-12 col-md-6">
+                    <p class="mb-0">&copy; 2024 Library Management System. All rights reserved.</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#">Privacy Policy</a>
-                    <span class="mx-2">|
-                    <a href="#">Terms of Use</a>
+                <div class="col-12 col-md-6 text-md-end">
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <span class="mx-2">|</span>
+                        <a href="#">Terms of Use</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Mobile Navigation Fix Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get navbar elements
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            const body = document.body;
+            
+            // Handle navbar toggle
+            if (navbarToggler && navbarCollapse) {
+                navbarToggler.addEventListener('click', function() {
+                    // Small delay to let Bootstrap handle the collapse
+                    setTimeout(() => {
+                        if (navbarCollapse.classList.contains('show')) {
+                            body.classList.add('navbar-open');
+                        } else {
+                            body.classList.remove('navbar-open');
+                        }
+                    }, 100);
+                });
+                
+                // Close navbar when clicking on nav links (mobile)
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (window.innerWidth < 992) {
+                            navbarCollapse.classList.remove('show');
+                            body.classList.remove('navbar-open');
+                        }
+                    });
+                });
+                
+                // Close navbar when clicking outside (mobile)
+                document.addEventListener('click', function(event) {
+                    if (window.innerWidth < 992) {
+                        if (!event.target.closest('.navbar')) {
+                            navbarCollapse.classList.remove('show');
+                            body.classList.remove('navbar-open');
+                        }
+                    }
+                });
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 992) {
+                    body.classList.remove('navbar-open');
+                    navbarCollapse.classList.remove('show');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

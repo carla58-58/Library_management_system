@@ -3,17 +3,13 @@
 {% block content %}
 <style>
  html {
-   height: 100%;
-   overflow: hidden;
    margin: 0;
  }
  body {
    position: relative;
-   height: 100%;
    background: white;
    margin: 0;
-   display: flex;
-   flex-direction: column;
+   min-height: 100vh;
  }
 
  .shelf {
@@ -334,45 +330,513 @@
    }
  }
 </style>
+
+<!-- Add some minimal custom styles for better UI -->
+<style>
+.hero-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 40px 0;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.hero-title {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.hero-text {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    height: 100%;
+    border-left: 4px solid #007bff;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card h2 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.feature-card p, .feature-card li {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.library-image {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.library-image:hover {
+    transform: scale(1.05);
+}
+
+/* Reviews Section Styles */
+.reviews-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 60px 40px;
+    border-radius: 20px;
+    margin: 40px 0;
+}
+
+.section-title {
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.review-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    border-top: 4px solid #007bff;
+    margin-bottom: 20px;
+}
+
+.review-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.review-stars {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.review-text {
+    color: #2c3e50;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-style: italic;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 2px solid #f8f9fa;
+}
+
+.reviewer-avatar {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.reviewer-details h4 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.reviewer-details span {
+    color: #6c757d;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Responsive Design for Reviews */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    /* Hero Section Mobile */
+    .hero-section {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 30px 20px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2rem !important;
+        margin-bottom: 15px;
+    }
+    
+    .hero-text {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+    .btn-primary-custom {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 280px;
+        margin-bottom: 20px;
+    }
+    
+    .library-image {
+        max-width: 200px;
+        height: auto;
+        margin-top: 20px;
+    }
+    
+    /* Features Section Mobile */
+    .feature-card {
+        padding: 25px 20px;
+        margin-bottom: 20px;
+    }
+    
+    .feature-card h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .feature-card p, .feature-card li {
+        font-size: 0.95rem;
+    }
+    
+    /* Reviews Section Mobile */
+    .reviews-section {
+        padding: 40px 20px;
+        margin: 20px 0;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .review-card {
+        padding: 25px 20px;
+        margin-bottom: 15px;
+    }
+    
+    .reviewer-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .reviewer-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    
+    .review-text {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    
+    .reviewer-details h4 {
+        font-size: 1rem;
+    }
+    
+    .reviewer-details span {
+        font-size: 0.85rem;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+    .container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    /* Hero Section Extra Small */
+    .hero-section {
+        padding: 25px 15px;
+        margin-bottom: 25px;
+    }
+    
+    .hero-title {
+        font-size: 1.7rem !important;
+        margin-bottom: 12px;
+    }
+    
+    .hero-text {
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+    }
+    
+    .btn-primary-custom {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .library-image {
+        max-width: 150px;
+        margin-top: 15px;
+    }
+    
+    /* Features Section Extra Small */
+    .feature-card {
+        padding: 20px 15px;
+        margin-bottom: 15px;
+    }
+    
+    .feature-card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    
+    .feature-card p, .feature-card li {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    /* Reviews Section Extra Small */
+    .reviews-section {
+        padding: 30px 15px;
+        margin: 15px 0;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .section-title::after {
+        width: 60px;
+        height: 3px;
+    }
+    
+    .review-card {
+        padding: 20px 15px;
+        margin-bottom: 12px;
+    }
+    
+    .review-text {
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+    }
+    
+    .reviewer-avatar {
+        width: 45px;
+        height: 45px;
+        font-size: 1.8rem;
+    }
+    
+    .reviewer-details h4 {
+        font-size: 0.95rem;
+        margin-bottom: 3px;
+    }
+    
+    .reviewer-details span {
+        font-size: 0.8rem;
+    }
+    
+    .review-stars {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+}
+
+/* Landscape Phone Optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-section {
+        padding: 20px 15px;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem !important;
+    }
+    
+    .feature-card {
+        padding: 20px 15px;
+    }
+    
+    .reviews-section {
+        padding: 30px 20px;
+    }
+    
+    .review-card {
+        padding: 20px 15px;
+    }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (max-width: 768px) {
+    /* Ensure proper touch targets */
+    .btn-primary-custom {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    /* Improve readability */
+    body {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+    
+    /* Prevent horizontal scroll */
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    [class*="col-"] {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+</style>
+
 <body>
-<div>
-  <br>
-  
-  <div class="container mt-5">
-      <img src="{% static 'd.png' %}" class="rounded float-start" height="180" style="margin-right:20px" alt="Library Image">
-  </div>
-  <div class="container">
-      <h1 class="display-4">Hello, readers!</h1>
-      <p>Welcome to the Library. We have a large collection of books to cater the reading needs of all kinds of readers</p>
-      <p><a role="button" href="/issue" class="btn btn-secondary btn-lg">Browse our collection>></a></p>
+<div class="container mt-4">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h1 class="hero-title display-4">Hello, readers! 📚</h1>
+        <p class="hero-text">Welcome to our Digital Library. Discover thousands of books and manage your reading journey with our modern library management system.</p>
+        <a role="button" href="/issue" class="btn btn-primary-custom btn-lg">
+          🔍 Browse Collection
+        </a>
+      </div>
+      <div class="col-lg-4 text-center">
+        <img src="{% static 'd.png' %}" class="library-image img-fluid" height="200" alt="Library Image">
+      </div>
+    </div>
   </div>
 </div>
-  
+
+<!-- Features Section -->
 <div class="container mt-5">
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2>Why reading is important?</h2>
-        <p>Reading holds immense importance because it expands our knowledge, enhances our critical thinking skills, and transports us into different worlds and perspectives, ultimately enriching our lives in countless ways.</p>
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="feature-card">
+        <h2>📖 Why Reading Matters</h2>
+        <p>Reading expands our knowledge, enhances critical thinking skills, and transports us into different worlds and perspectives, ultimately enriching our lives in countless ways.</p>
+      </div>
     </div>
-    <div class="col">
-      <h2>Key Benefits</h2>
-        <ul>
-            <li>Knowledge Expansion</li>
-            <li>Improvement in Critical Thinking</li>
-            <li>Enhanced Vocabulary and Language Skills</li>
-            <li>Stress Reduction and Mental Stimulation</li>
+    <div class="col-lg-4">
+      <div class="feature-card">
+        <h2>🎯 Key Benefits</h2>
+        <ul class="list-unstyled">
+          <li>✅ Knowledge Expansion</li>
+          <li>✅ Critical Thinking Improvement</li>
+          <li>✅ Enhanced Vocabulary & Language Skills</li>
+          <li>✅ Stress Reduction & Mental Stimulation</li>
         </ul>
+      </div>
     </div>
-    <div class="col">
-      <h2>Thought for the day!</h2>
-        <p>Each page offers knowledge, inspiration, and a pathway to new perspectives. Dive into the world of reading and discover the endless possibilities it holds for your growth and imagination.</p>
-        <br>
-        <br>
+    <div class="col-lg-4">
+      <div class="feature-card">
+        <h2>💡 Daily Inspiration</h2>
+        <p>Each page offers knowledge, inspiration, and a pathway to new perspectives. Dive into the world of reading and discover endless possibilities for your growth and imagination.</p>
+      </div>
     </div>
   </div>
 </div>
- </div>
+
+<!-- Reviews Section -->
+<div class="container mt-5">
+  <div class="reviews-section">
+    <h2 class="section-title text-center mb-5">⭐ What Our Readers Say</h2>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="review-card">
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"This digital library has completely transformed my reading experience. The interface is intuitive and the book collection is incredibly diverse. I've discovered so many amazing titles!"</p>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">👩‍🎓</div>
+            <div class="reviewer-details">
+              <h4>Sarah Martinez</h4>
+              <span>Literature Student</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="review-card">
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"The search functionality is fantastic! I can easily find books by genre, author, or subject. The return process is seamless, and I love tracking my reading history."</p>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">👨‍🔬</div>
+            <div class="reviewer-details">
+              <h4>Dr. Michael Chen</h4>
+              <span>Research Professor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="review-card">
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"As a book enthusiast, I appreciate how organized and user-friendly this system is. The digital lending process is quick, and I never have to worry about late fees!"</p>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">👨‍💼</div>
+            <div class="reviewer-details">
+              <h4>James Wilson</h4>
+              <span>Book Club Leader</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-5"></div>
  
 </body>
 {% endblock %}

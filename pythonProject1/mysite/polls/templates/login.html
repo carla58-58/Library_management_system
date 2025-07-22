@@ -1,40 +1,177 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<br>
-<center>
-   <h1 class="display-5">Login To Library</h1>
-</center>
-<br><br>
-<div class="container border border-dark p-3 mt-10" style="width: 550px">
-   <form action="{% url 'login' %}" method="POST">
-       {% csrf_token %}
-       <div class="form-group">
-           <label><b>Username</b></label>
-           <input type="text" name="username" class="form-control" placeholder="Username">
-       </div>
-       <br>
-       <div class="form-group">
-           <label><b>Password</b></label>
-           <input type="password" name="password" class="form-control" placeholder="Password">
-       </div>
-       <br>
-       <center>
-           <button type="submit" class="btn btn-primary">Login</button>
-       </center>
-       <br>
-       <center>
-           <a href="/register">Don't have an account?</a>
-       </center>
-       <center>
-           <a href="/admin">Login as Admin</a>
-       </center>
-   </form>
-   <br>
-   {% for message in messages %}
-   <div class="alert alert-danger" role="alert">
-       {{message}}
-   </div>
-   {% endfor %}
+<style>
+.login-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 40px 0;
+}
+
+.login-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-title {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.login-subtitle {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control-modern {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-control-modern:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.15);
+    background-color: white;
+    outline: none;
+}
+
+.btn-login {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+}
+
+.login-links {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.login-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.login-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.admin-link {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.admin-link:hover {
+    color: #495057;
+}
+
+.alert-modern {
+    border-radius: 12px;
+    border: none;
+    padding: 15px 20px;
+    margin-top: 20px;
+}
+
+.login-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+</style>
+
+<div class="login-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="login-card">
+                    <div class="login-header">
+                        <div class="login-icon">📚</div>
+                        <h1 class="login-title">Welcome Back</h1>
+                        <p class="login-subtitle">Sign in to access your library account</p>
+                    </div>
+                    
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control form-control-modern" placeholder="Enter your username" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control form-control-modern" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-login">
+                            🔐 Sign In
+                        </button>
+                        
+                        {% for message in messages %}
+                        <div class="alert alert-danger alert-modern" role="alert">
+                            <strong>❌ Error:</strong> {{message}}
+                        </div>
+                        {% endfor %}
+                    </form>
+                    
+                    <div class="login-links">
+                        <a href="/register" class="login-link">
+                            ✨ Don't have an account? Create one here
+                        </a>
+                        <a href="/admin" class="login-link admin-link">
+                            ⚙️ Admin Portal
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

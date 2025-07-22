@@ -1,56 +1,62 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 {% extends 'base.html' %} {% block content %} {% for message in messages %}
-<div class="alert alert-{{message.tags}} rounded-0" role="alert">
+<div class="alert alert-{{message.tags}}" role="alert">
  {{message}}
 </div>
 {% endfor %}
-<center>
- <br />
- <h1 class="display-5 fw-bold">Books you have issued</h1>
- <br />
- <div class="input-group container">
-   <input
-     id="search"
-     type="search"
-     class="form-control rounded"
-     placeholder="Search Book"
-     aria-label="Search"
-     aria-describedby="search-addon"
-   />
- </div>
-</center>
-<br />
+
 <div class="container">
- <table class="table">
-   <thead class="thead-dark">
-     <tr>
-       <th scope="col">Book Name</th>
-       <th scope="col">Author Name</th>
-       <th scope="col">
-         <center>Return Button</center>
-       </th>
-     </tr>
-   </thead>
-   <tbody id="table_data">
-     {% for book in books %}
-     <tr>
-       <td>{{book.book_name}}</td>
-       <td>{{book.author_name}}</td>
-       <td>
-         <center>
-           <form action="return_item" method="post">
-             {% csrf_token %}
-             <input type="hidden" name="book_id" value="{{book.id}}" />
-             <button type="submit" class="btn btn-outline-success btn-sm">
-               Return
-             </button>
-           </form>
-         </center>
-       </td>
-     </tr>
-     {% endfor %}
-   </tbody>
- </table>
+  <!-- Header Section -->
+  <div class="page-header">
+    <h1 class="display-5 fw-bold">📖 Your Issued Books</h1>
+    <p class="page-subtitle">Manage and return your borrowed books easily</p>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-wrapper">
+    <div class="input-group">
+      <input
+        id="search"
+        type="search"
+        class="form-control"
+        placeholder="🔍 Search your issued books..."
+        aria-label="Search"
+        aria-describedby="search-addon"
+      />
+    </div>
+  </div>
+
+  <!-- Books Table -->
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">📚 Book Name</th>
+          <th scope="col">👤 Author Name</th>
+          <th scope="col">🔄 Action</th>
+        </tr>
+      </thead>
+      <tbody id="table_data">
+        {% for book in books %}
+        <tr>
+          <td><span class="book-name">{{book.book_name}}</span></td>
+          <td><span class="author-name">{{book.author_name}}</span></td>
+          <td>
+            <center>
+              <form action="return_item" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="book_id" value="{{book.id}}" />
+                <button type="submit" class="btn btn-outline-warning btn-sm">
+                  <b>🔄 Return</b>
+                </button>
+              </form>
+            </center>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 <script>
  $(document).ready(function () {
@@ -63,26 +69,12 @@
  });
 </script>
 <style>
- table {
-   border-collapse: collapse;
-   border-spacing: 0;
-   border-radius: 10px;
-   width: 100%;
-   border: 1px solid #ddd;
- }
-
- th,
- td {
-   text-align: left;
-   padding: 16px;
- }
-
- tr:nth-child(even) {
-   background-color: #f2f2f2;
- }
-
- tr:nth-child(odd) {
-   background-color: #ffffff;
+ /* Enhanced Return Page Styles */
+ body {
+   background: white;
+   background-attachment: fixed;
+   background-repeat: no-repeat;
+   min-height: 100vh;
  }
 
  .container {
@@ -93,15 +85,338 @@
    margin-left: auto;
  }
 
- .input-group {
-   width: 100%;
-   margin-bottom: 1rem;
+ /* Header Improvements */
+ .page-header {
+   background: white;
+   padding: 30px;
+   border-radius: 15px;
+   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+   margin-bottom: 30px;
+   text-align: center;
  }
 
- body {
+ .page-header h1 {
+   color: #2c3e50;
+   margin-bottom: 10px;
+ }
+
+ .page-subtitle {
+   color: #6c757d;
+   font-size: 1.1rem;
+   margin: 0;
+ }
+
+ /* Search Section */
+ .search-wrapper {
    background: white;
-   background-attachment: fixed;
-   background-repeat: no-repeat;
+   padding: 25px;
+   border-radius: 15px;
+   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+   margin-bottom: 25px;
+ }
+
+ .input-group {
+   width: 100%;
+   margin-bottom: 0;
+   max-width: 500px;
+   margin: 0 auto;
+ }
+
+ #search {
+   border: 2px solid #e9ecef;
+   border-radius: 25px;
+   padding: 12px 20px;
+   font-size: 1rem;
+   transition: all 0.3s ease;
+ }
+
+ #search:focus {
+   border-color: #f39c12;
+   box-shadow: 0 0 0 0.2rem rgba(243,156,18,0.15);
+   outline: none;
+ }
+
+ /* Table Improvements */
+ .table-wrapper {
+   background: white;
+   border-radius: 15px;
+   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+   overflow: hidden;
+   padding: 20px;
+ }
+
+ table {
+   border-collapse: separate;
+   border-spacing: 0;
+   border-radius: 10px;
+   width: 100%;
+   border: none;
+   margin-bottom: 0;
+ }
+
+ thead {
+   background: linear-gradient(45deg, #f39c12, #e67e22);
+   color: white;
+ }
+
+ th {
+   text-align: left;
+   padding: 16px;
+   font-weight: 600;
+   border: none;
+   color: white;
+ }
+
+ td {
+   text-align: left;
+   padding: 16px;
+   border-bottom: 1px solid #f8f9fa;
+   vertical-align: middle;
+ }
+
+ tr:nth-child(even) {
+   background-color: #f8f9fa;
+ }
+
+ tr:nth-child(odd) {
+   background-color: #ffffff;
+ }
+
+ tbody tr {
+   transition: all 0.2s ease;
+ }
+
+ tbody tr:hover {
+   background-color: #e3f2fd !important;
+   transform: scale(1.01);
+ }
+
+ /* Button Improvements */
+ .btn-outline-warning {
+   border: 2px solid #f39c12;
+   color: #f39c12;
+   border-radius: 20px;
+   padding: 8px 16px;
+   font-weight: 600;
+   transition: all 0.3s ease;
+   text-transform: uppercase;
+   letter-spacing: 0.5px;
+ }
+
+ .btn-outline-warning:hover {
+   background-color: #f39c12;
+   border-color: #f39c12;
+   color: white;
+   transform: translateY(-2px);
+   box-shadow: 0 5px 15px rgba(243,156,18,0.3);
+ }
+
+ /* Alert Improvements */
+ .alert {
+   border-radius: 10px;
+   border: none;
+   margin-bottom: 20px;
+   font-weight: 500;
+ }
+
+ .alert-success {
+   background: linear-gradient(45deg, #d4edda, #c3e6cb);
+   color: #155724;
+   border-left: 4px solid #28a745;
+ }
+
+ .alert-danger {
+   background: linear-gradient(45deg, #f8d7da, #f1b0b7);
+   color: #721c24;
+   border-left: 4px solid #dc3545;
+ }
+
+ /* Book Info Styling */
+ .book-name {
+   font-weight: 600;
+   color: #2c3e50;
+ }
+
+ .author-name {
+   color: #6c757d;
+   font-style: italic;
+ }
+
+ /* Enhanced Mobile Responsiveness */
+ @media (max-width: 768px) {
+   .container {
+     padding-left: 10px;
+     padding-right: 10px;
+   }
+   
+   .page-header {
+     margin-left: 0;
+     margin-right: 0;
+     padding: 20px 15px;
+     margin-bottom: 20px;
+   }
+   
+   .page-header h1 {
+     font-size: 1.8rem;
+   }
+   
+   .page-subtitle {
+     font-size: 1rem;
+   }
+   
+   .search-wrapper {
+     margin-left: 0;
+     margin-right: 0;
+     padding: 20px 15px;
+     margin-bottom: 20px;
+   }
+   
+   .input-group {
+     max-width: 100%;
+   }
+   
+   #search {
+     font-size: 0.9rem;
+     padding: 10px 15px;
+   }
+   
+   .table-wrapper {
+     margin-left: 0;
+     margin-right: 0;
+     padding: 15px;
+     overflow-x: auto;
+   }
+   
+   /* Hide table headers and redesign for mobile card layout */
+   table, thead, tbody, th, td, tr {
+     display: block;
+   }
+   
+   thead tr {
+     position: absolute;
+     top: -9999px;
+     left: -9999px;
+   }
+   
+   tr {
+     background: white;
+     border: 1px solid #e9ecef;
+     border-radius: 10px;
+     margin-bottom: 15px;
+     padding: 15px;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+   }
+   
+   tr:hover {
+     transform: none;
+     background-color: #f8f9fa;
+   }
+   
+   td {
+     border: none;
+     padding: 8px 0;
+     text-align: left;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-bottom: 1px solid #f0f0f0;
+   }
+   
+   td:last-child {
+     border-bottom: none;
+     justify-content: center;
+     padding-top: 15px;
+   }
+   
+   td:before {
+     content: attr(data-label);
+     font-weight: 600;
+     color: #2c3e50;
+     flex-basis: 40%;
+     text-align: left;
+   }
+   
+   /* Style the mobile labels */
+   td:nth-of-type(1):before { content: "📚 Book:"; }
+   td:nth-of-type(2):before { content: "👤 Author:"; }
+   td:nth-of-type(3):before { content: ""; }
+   
+   .book-name, .author-name {
+     flex-basis: 55%;
+     text-align: right;
+   }
+   
+   .btn-outline-warning {
+     padding: 10px 20px;
+     font-size: 0.9rem;
+     width: 100%;
+     max-width: 200px;
+   }
+ }
+ 
+ /* Extra small devices */
+ @media (max-width: 480px) {
+   .page-header h1 {
+     font-size: 1.5rem;
+   }
+   
+   .page-subtitle {
+     font-size: 0.9rem;
+   }
+   
+   .page-header, .search-wrapper, .table-wrapper {
+     padding: 15px 10px;
+   }
+   
+   #search {
+     font-size: 0.85rem;
+     padding: 8px 12px;
+   }
+   
+   tr {
+     padding: 12px;
+     margin-bottom: 12px;
+   }
+   
+   td {
+     padding: 6px 0;
+     font-size: 0.9rem;
+   }
+   
+   td:before {
+     font-size: 0.85rem;
+     flex-basis: 45%;
+   }
+   
+   .book-name, .author-name {
+     flex-basis: 50%;
+     font-size: 0.9rem;
+   }
+   
+   .btn-outline-warning {
+     padding: 8px 16px;
+     font-size: 0.85rem;
+   }
+ }
+
+ /* Landscape phone optimization */
+ @media (max-width: 768px) and (orientation: landscape) {
+   .page-header {
+     padding: 15px;
+   }
+   
+   .page-header h1 {
+     font-size: 1.6rem;
+   }
+   
+   tr {
+     padding: 12px;
+     margin-bottom: 12px;
+   }
+   
+   td {
+     padding: 5px 0;
+   }
  }
 </style>
 {% endblock %}
