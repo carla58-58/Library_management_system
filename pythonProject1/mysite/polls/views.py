@@ -7,6 +7,29 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from datetime import date
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+
+# ----------------- Health Check View -----------------
+
+def health_check(request):
+    """Simple health check endpoint to verify app is running"""
+    try:
+        # Test database connection
+        book_count = Book.objects.count()
+        return JsonResponse({
+            'status': 'healthy',
+            'message': 'Library Management System is running',
+            'database': 'connected',
+            'books_count': book_count
+        })
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e),
+            'database': 'disconnected'
+        }, status=500)
 
 
 # ----------------- Library Management System Views -----------------
