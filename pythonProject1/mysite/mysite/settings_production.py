@@ -1,11 +1,10 @@
 import os
 import dj_database_url
-from decouple import config
 from .settings import *
 
 # Production settings
-DEBUG = config('DEBUG', default=False, cast=bool)
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-pqzewr@g%ybvpgib5^%sx@y%&z13^wvtr^pt^+294-0@2ye)p^')
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ['true', '1', 'yes']
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-pqzewr@g%ybvpgib5^%sx@y%&z13^wvtr^pt^+294-0@2ye)p^')
 
 # Allowed hosts for production
 ALLOWED_HOSTS = [
