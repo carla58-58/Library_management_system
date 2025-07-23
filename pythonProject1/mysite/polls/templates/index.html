@@ -333,60 +333,196 @@
 
 <!-- Add some minimal custom styles for better UI -->
 <style>
+/* Animations for Hello Readers section */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    0%, 50% {
+        border-color: transparent;
+    }
+    51%, 100% {
+        border-color: #007bff;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 60%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    80% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .hero-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 40px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 80px 0;
     margin-bottom: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 0;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 2px, transparent 2px),
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 1px, transparent 1px),
+        radial-gradient(circle at 60% 60%, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 50px 50px, 30px 30px, 40px 40px;
+    animation: float 8s ease-in-out infinite;
 }
 
 .hero-title {
-    color: #2c3e50;
-    font-weight: 700;
-    margin-bottom: 15px;
+    color: white;
+    font-weight: 800;
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease-out;
+    position: relative;
+    font-size: 3.5rem !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-title::after {
+    display: none;
+}
+
+.hero-title .emoji {
+    display: none;
 }
 
 .hero-text {
-    color: #6c757d;
-    font-size: 1.1rem;
-    margin-bottom: 25px;
+    color: rgba(255,255,255,0.95);
+    font-size: 1.3rem;
+    margin-bottom: 35px;
+    animation: fadeInUp 1s ease-out 0.3s both;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    line-height: 1.6;
 }
 
 .btn-primary-custom {
-    background: linear-gradient(45deg, #007bff, #0056b3);
+    background: linear-gradient(45deg, #4a148c, #6a1b9a);
     border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-weight: 600;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     transition: all 0.3s ease;
+    animation: fadeInUp 1s ease-out 0.6s both;
+    box-shadow: 0 8px 25px rgba(74, 20, 140, 0.4);
+    font-size: 1.1rem;
+    color: white;
 }
 
 .btn-primary-custom:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(74, 20, 140, 0.6);
+    background: linear-gradient(45deg, #6a1b9a, #8e24aa);
+    color: white;
 }
 
 .feature-card {
     background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
     height: 100%;
-    border-left: 4px solid #007bff;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+}
+
+.feature-card:nth-child(1) .feature-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.feature-card:nth-child(2) .feature-icon {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+}
+
+.feature-card:nth-child(3) .feature-icon {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
 }
 
 .feature-card h2 {
-    color: #2c3e50;
-    font-size: 1.5rem;
+    color: #2d3748;
+    font-size: 1.4rem;
     margin-bottom: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
 }
 
 .feature-card p, .feature-card li {
@@ -397,34 +533,54 @@
 .library-image {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease-out 0.9s both;
 }
 
 .library-image:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
 
 /* Reviews Section Styles */
 .reviews-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 60px 40px;
     border-radius: 20px;
     margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.reviews-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 2px, transparent 2px),
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 40px 40px, 25px 25px;
+    animation: float 10s ease-in-out infinite;
 }
 
 .section-title {
-    color: #2c3e50;
+    color: white;
     font-weight: 700;
     font-size: 2.2rem;
     margin-bottom: 2rem;
     position: relative;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    z-index: 2;
 }
 
 .section-title::after {
     content: '';
     width: 80px;
     height: 4px;
-    background: linear-gradient(45deg, #007bff, #0056b3);
+    background: linear-gradient(45deg, #ff6b6b, #ee5a52);
     position: absolute;
     bottom: -10px;
     left: 50%;
@@ -433,25 +589,30 @@
 }
 
 .review-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     height: 100%;
-    border-top: 4px solid #007bff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
 }
 
 .review-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
+    background: rgba(255, 255, 255, 0.98);
 }
 
 .review-stars {
     font-size: 1.2rem;
     margin-bottom: 15px;
     text-align: center;
+    color: #ffc107;
 }
 
 .review-text {
@@ -475,12 +636,13 @@
     font-size: 2.5rem;
     width: 60px;
     height: 60px;
-    background: linear-gradient(45deg, #007bff, #0056b3);
+    background: linear-gradient(45deg, #ff6b6b, #ee5a52);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
 .reviewer-details h4 {
@@ -741,19 +903,18 @@
 </style>
 
 <body>
-<div class="container mt-4">
-  <!-- Hero Section -->
-  <div class="hero-section">
+<div class="hero-section">
+  <div class="container">
     <div class="row align-items-center">
-      <div class="col-lg-8">
-        <h1 class="hero-title display-4">Hello, readers! 📚</h1>
-        <p class="hero-text">Welcome to our Digital Library. Discover thousands of books and manage your reading journey with our modern library management system.</p>
+      <div class="col-lg-7">
+        <h1 class="hero-title">Hello, readers!</h1>
+        <p class="hero-text">Welcome to our Digital Library. Discover thousands of books and manage your reading journey with our modern Library management system.</p>
         <a role="button" href="/issue" class="btn btn-primary-custom btn-lg">
-          🔍 Browse Collection
+          BROWSE COLLECTION
         </a>
       </div>
-      <div class="col-lg-4 text-center">
-        <img src="{% static 'd.png' %}" class="library-image img-fluid" height="200" alt="Library Image">
+      <div class="col-lg-5 text-center">
+        <img src="{% static 'image.png' %}" class="library-image img-fluid" style="max-width: 400px;" alt="Library Image">
       </div>
     </div>
   </div>
@@ -764,13 +925,13 @@
   <div class="row g-4">
     <div class="col-lg-4">
       <div class="feature-card">
-        <h2>📖 Why Reading Matters</h2>
+        <h2><div class="feature-icon">�</div>Why Reading Matters</h2>
         <p>Reading expands our knowledge, enhances critical thinking skills, and transports us into different worlds and perspectives, ultimately enriching our lives in countless ways.</p>
       </div>
     </div>
     <div class="col-lg-4">
       <div class="feature-card">
-        <h2>🎯 Key Benefits</h2>
+        <h2><div class="feature-icon">🎯</div>Key Benefits</h2>
         <ul class="list-unstyled">
           <li>✅ Knowledge Expansion</li>
           <li>✅ Critical Thinking Improvement</li>
@@ -781,7 +942,7 @@
     </div>
     <div class="col-lg-4">
       <div class="feature-card">
-        <h2>💡 Daily Inspiration</h2>
+        <h2><div class="feature-icon">💡</div>Daily Inspiration</h2>
         <p>Each page offers knowledge, inspiration, and a pathway to new perspectives. Dive into the world of reading and discover endless possibilities for your growth and imagination.</p>
       </div>
     </div>
