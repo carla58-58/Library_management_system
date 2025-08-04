@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app/mysite
 
 
-COPY pythonProject1/mysite/requirements.txt /app/
+COPY pythonProject1/mysite/requirements.txt /app/mysite/
 COPY pythonProject1/ /app/
 
 RUN pip install --upgrade pip \
