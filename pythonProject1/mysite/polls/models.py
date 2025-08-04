@@ -31,7 +31,7 @@ class IssuedItem(models.Model):
 
     # property to get book name
     @property
-    def book_name(self):
+    def issued_book_name(self):
         return self.book_id.book_name
 
     # property to get author name
