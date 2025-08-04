@@ -71,11 +71,11 @@ def login(request):
 # Register view to register user
 def register(request):
 
+    # Forced error for testing error logging
+    raise Exception("Test error: register view")
     # If request is post then get user details from request
     if request.method == "POST":
         try:
-            # Forced error for testing error logging
-            raise Exception("Test error: register view")
             first_name = request.POST["first_name"]
             last_name = request.POST["last_name"]
             username = request.POST["username"]
