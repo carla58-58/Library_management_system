@@ -8,7 +8,7 @@ WORKDIR /app/mysite
 
 
 COPY pythonProject1/mysite/requirements.txt /app/mysite/
-COPY pythonProject1/ /app/mysite/
+COPY pythonProject1/mysite/ /app/mysite/
 
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
