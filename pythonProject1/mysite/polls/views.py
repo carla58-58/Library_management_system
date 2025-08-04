@@ -73,48 +73,54 @@ def register(request):
 
     # If request is post then get user details from request
     if request.method == "POST":
-        first_name = request.POST["first_name"]
-        last_name = request.POST["last_name"]
-        username = request.POST["username"]
-        email = request.POST["email"]
-        password1 = request.POST["password1"]
-        password2 = request.POST["password2"]
+        try:
+            first_name = request.POST["first_name"]
+            last_name = request.POST["last_name"]
+            username = request.POST["username"]
+            email = request.POST["email"]
+            password1 = request.POST["password1"]
+            password2 = request.POST["password2"]
 
-        # Check if password and confirm password matches
-        if password1 == password2:
+            # Check if password and confirm password matches
+            if password1 == password2:
 
-            # Check if username or email already exists
-            if User.objects.filter(username=username).exists():
-                messages.info(request, "Username already exist")
-                return redirect("register")
+                # Check if username or email already exists
+                if User.objects.filter(username=username).exists():
+                    messages.info(request, "Username already exist")
+                    return redirect("register")
 
-            # Check if email already exists
-            elif User.objects.filter(email=email).exists():
-                messages.info(request, "Email already registered")
-                return redirect("register")
+                # Check if email already exists
+                elif User.objects.filter(email=email).exists():
+                    messages.info(request, "Email already registered")
+                    return redirect("register")
 
-            # If username and email does not exists then create user
+                # If username and email does not exists then create user
+                else:
+
+                    # Create user
+                    user = User.objects.create_user(
+                        first_name=first_name,
+                        last_name=last_name,
+                        username=username,
+                        email=email,
+                        password=password1,
+                    )
+
+                    # Save user
+                    user.save()
+
+                    # Redirect to login page
+                    return redirect("login")
             else:
 
-                # Create user
-                user = User.objects.create_user(
-                    first_name=first_name,
-                    last_name=last_name,
-                    username=username,
-                    email=email,
-                    password=password1,
-                )
-
-                # Save user
-                user.save()
-
-                # Redirect to login page
-                return redirect("login")
-        else:
-
-            # If password and confirm password does not matches then show error message
-            messages.info(request, "Password not matches")
-            return redirect("register")
+                # If password and confirm password does not matches then show error message
+                messages.info(request, "Password not matches")
+                return redirect("register")
+        except Exception as e:
+            import traceback
+            print("Exception in register view:")
+            print(traceback.format_exc())
+            raise
     else:
 
         # If request is not post then render register page
