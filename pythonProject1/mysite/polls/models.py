@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 from datetime import date
 from django.utils import timezone
 
+def current_time():
+    return timezone.now().time()
+
+def current_date():
+    return timezone.now().date()
+
 # ----------- Library Management System Models ------------
 
 # Book model to store book details
@@ -12,8 +18,8 @@ class Book(models.Model):
     author_name = models.CharField(max_length=200)
     quantity = models.IntegerField(default=1)
     subject = models.CharField(max_length=2000)
-    book_add_time = models.TimeField(default=timezone.now)
-    book_add_date = models.DateField(default=timezone.now)
+    book_add_time = models.TimeField(default=current_time)
+    book_add_date = models.DateField(default=current_date)
 
     class Meta:
         unique_together = ("book_name", "author_name")
